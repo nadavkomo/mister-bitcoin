@@ -22,10 +22,10 @@ export class TransferFund extends Component {
         const {amount} = this.state
         return (
             <section className="transfer-fund flex column align-center">
-                <h3>{`Transfer coins to ${contact.name}`}</h3>
+                <h3 className="text-center">{`Transfer BTC coins to ${contact.name}`}</h3>
                 <form className="amount flex justify-center" onSubmit={this.onAddMove} >
-                    <p>Amount</p>
-                    <input type="number" name="amount" value={amount} onChange={this.handleChange} />
+                    <input type="number" step="any" name="amount" value={amount} onChange={this.handleChange} />
+                    <button>Transfer</button>
                 </form>
             </section>
         )

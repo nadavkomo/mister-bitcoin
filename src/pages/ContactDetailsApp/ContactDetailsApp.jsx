@@ -9,6 +9,7 @@ import { MoveList } from '../../cmps/MoveList/MoveList'
 import { eventBus } from '../../services/eventBusService'
 import contactService from '../../services/contactService'
 import userService from '../../services/userService'
+import bitcoinService from '../../services/bitcoinService'
 import { storageService } from '../../services/storageService'
 import './ContactDetailsApp.scss'
 import back from '../../assets/icons/back.png'
@@ -23,7 +24,7 @@ class _ContactDetails extends Component {
     async componentDidMount() {
         console.log(this.props.currUser);
         this.loadContact()
-        if(storageService.load('CURR_USER')) {
+        if (storageService.load('CURR_USER')) {
             await this.props.setUser(storageService.load('CURR_USER'))
         }
         // eventBus.emit('details mounted')
@@ -87,9 +88,14 @@ class _ContactDetails extends Component {
         console.log(currMoves);
         return currMoves
     }
+    getBtnValue = async () => {
+        const { contact } = this.props
+        const value = await bitcoinService.getRate(contact.coins)
+        return value
+    }
     render() {
         const { contact } = this.props
-        const {errMsg} = this.state
+        const { errMsg } = this.state
         if (!contact) return <div>Loading...</div>
         return <div className="contact-details flex column align-center">
             <section className="btns flex justify-center">
@@ -106,8 +112,8 @@ class _ContactDetails extends Component {
             <p>{contact.phone}</p>
             <TransferFund onAddMove={this.onAddMove} contact={contact} />
             <p>{errMsg}</p>
-            <h3>Your moves:</h3>
-            {this.currMoves().length > 0 && <MoveList moves={this.currMoves()} />}
+            {this.currMoves().length > 0 && <h3>Your moves:</h3>}
+            {this.currMoves().length > 0 && <MoveList btnValue={this.getBtnValue()} moves={this.currMoves()} />}
         </div>
     }
 }

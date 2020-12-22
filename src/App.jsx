@@ -8,6 +8,7 @@ import { HomePage } from './pages/HomePage/HomePage'
 import { ContactEdit } from './pages/ContactEditApp/ContactEditApp';
 import StatisticApp from './pages/StatisticApp/StatisticApp'
 import {AppFooter} from './cmps/AppFooter/AppFooter'
+
 export function App() {
   return (
     <div className="App main-container">

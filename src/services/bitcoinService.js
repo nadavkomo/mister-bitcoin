@@ -11,9 +11,11 @@ export default {
 async function getRate(coins) {
     try {
         const res = await axios.get(`https://blockchain.info/tobtc?currency=USD&value=${coins}`)
+        storageService.store('BTC_VALUE', res.data)
         return res.data;
     } catch (err) {
         console.error('ERROR!', err)
+        return storageService.load('BTC_VALUE')
     }
 }
 

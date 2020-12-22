@@ -44,7 +44,7 @@ export class UserPreview extends Component {
                 </section>
                 <section className="transfer-details flex column align-center">
                     {user.moves.length > 0 && <h3>Your last moves</h3>}
-                    {user.moves.length > 0 && <MoveList moves={this.lastMoves()} />}
+                    {user.moves.length > 0 && <MoveList btnValue={btnValue} moves={this.lastMoves()} />}
                 </section>
             </section>
         )
