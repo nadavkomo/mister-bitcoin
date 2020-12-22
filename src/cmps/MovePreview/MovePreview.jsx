@@ -5,10 +5,12 @@ import { withRouter } from 'react-router-dom'
 import './MovePreview.scss'
 
 function _MovePreview(props) {
-    const {move} = props
+    const {btnValue, move} = props
     function convertUsd() {
-        console.log((move.amount * 23547.53).toLocaleString());
-        return (move.amount * 23547.53).toFixed(2).toLocaleString()
+        console.log(btnValue);
+        console.log(1 / btnValue);
+        console.log((move.amount * (1 / btnValue)).toLocaleString());
+        return (move.amount * (1 / btnValue)).toFixed(2).toLocaleString()
     }
     return (
         <li className="move-preview flex column align-center hover-pointer" onClick={() => props.history.push(`/contact/${move.toId}`)} >

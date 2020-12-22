@@ -19,11 +19,13 @@ import edit from '../../assets/icons/edit.png'
 class _ContactDetails extends Component {
     state = {
         contact: null,
-        errMsg: ''
+        errMsg: '',
+        btnValue: ''
     }
     async componentDidMount() {
         console.log(this.props.currUser);
         this.loadContact()
+        this.getBtnValue()
         if (storageService.load('CURR_USER')) {
             await this.props.setUser(storageService.load('CURR_USER'))
         }
@@ -89,13 +91,13 @@ class _ContactDetails extends Component {
         return currMoves
     }
     getBtnValue = async () => {
-        const { contact } = this.props
-        const value = await bitcoinService.getRate(contact.coins)
-        return value
+        const value = await bitcoinService.getRate(1)
+        console.log(value);
+        this.setState({btnValue: value})
     }
     render() {
         const { contact } = this.props
-        const { errMsg } = this.state
+        const { btnValue, errMsg } = this.state
         if (!contact) return <div>Loading...</div>
         return <div className="contact-details flex column align-center">
             <section className="btns flex justify-center">
@@ -113,7 +115,7 @@ class _ContactDetails extends Component {
             <TransferFund onAddMove={this.onAddMove} contact={contact} />
             <p>{errMsg}</p>
             {this.currMoves().length > 0 && <h3>Your moves:</h3>}
-            {this.currMoves().length > 0 && <MoveList btnValue={this.getBtnValue()} moves={this.currMoves()} />}
+            {this.currMoves().length > 0 && <MoveList btnValue={btnValue} moves={this.currMoves()} />}
         </div>
     }
 }

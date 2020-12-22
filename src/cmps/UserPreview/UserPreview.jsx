@@ -10,7 +10,8 @@ import './UserPreview.scss'
 export class UserPreview extends Component {
     state = {
         user: '',
-        btnValue: ''
+        btnValue: '',
+        btnValue1: ''
     }
     componentDidMount() {
         this.loadUser()
@@ -19,6 +20,7 @@ export class UserPreview extends Component {
         const user = this.props.user
         this.setState({ user }, () => {
             this.getBtnValue(this.state.user.coins)
+            this.getBtnValueFor1()
         })
     }
     getBtnValue = async (coins) => {
@@ -31,8 +33,13 @@ export class UserPreview extends Component {
         }
         return this.props.user.moves
     }
+    getBtnValueFor1 = async() => {
+        const value = await bitcoinService.getRate(1)
+        console.log(value);
+        this.setState({ btnValue1: value })
+    }
     render() {
-        const { btnValue } = this.state
+        const { btnValue1,btnValue } = this.state
         const { user } = this.props
         if (!user) return <h3>Loading...</h3>
         return (
@@ -44,7 +51,7 @@ export class UserPreview extends Component {
                 </section>
                 <section className="transfer-details flex column align-center">
                     {user.moves.length > 0 && <h3>Your last moves</h3>}
-                    {user.moves.length > 0 && <MoveList btnValue={btnValue} moves={this.lastMoves()} />}
+                    {user.moves.length > 0 && <MoveList btnValue={btnValue1} moves={this.lastMoves()} />}
                 </section>
             </section>
         )
