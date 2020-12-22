@@ -1,0 +1,11 @@
+.contact-filter {
+    margin-bottom: 10px;
+    & input {
+        width: 200px;
+        text-align: center;
+        padding: 5px;
+        &:focus {
+            outline: 0;
+        }
+    }
+}

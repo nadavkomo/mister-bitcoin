@@ -1,0 +1,27 @@
+@import '../../assets/scss/setup/_variables.scss';
+.app-header {
+    position: sticky;
+    top: 0;
+    background-color: $clr2;
+    height: 70px;
+    padding: 0 20px;
+    color: $clr1;
+    .active {
+        color: $clr5;
+    }
+    & .main-nav {
+        a {
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 14px;
+            &:hover {
+                color: $clr5;
+            }
+        }
+    }
+    .logo {
+        color: $clr5;
+        text-transform: uppercase;
+        font-family: cursive;
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../assets/scss/setup/variables';
+.contact-app {
+    .filter {
+        position: sticky;
+        top: 85px;
+        background-color: #5E7FC2;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .add-btn {
+        position: fixed;
+        top: 90px;
+        left: 25px;
+    }
+    & h1 {
+        margin-bottom: 10px;
+    }
+}

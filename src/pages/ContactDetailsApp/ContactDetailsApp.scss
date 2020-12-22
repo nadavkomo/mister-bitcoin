@@ -1,0 +1,15 @@
+.contact-details {
+    .btns {
+        width: 100%;
+        &>* {
+            width: 50px;
+        }
+    }
+    & .contact-img {
+        height: 250px;
+        object-fit: contain;
+    }
+    &>* {
+        margin-bottom: 10px;
+    }
+}

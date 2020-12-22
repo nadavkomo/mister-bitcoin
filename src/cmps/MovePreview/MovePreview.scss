@@ -1,0 +1,8 @@
+.move-preview {
+    padding: 5px;
+    & .transfer-details {
+        &>*:first-child{
+            margin-right: 5px;
+        }
+    }
+}

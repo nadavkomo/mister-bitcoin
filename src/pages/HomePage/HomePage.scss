@@ -1,0 +1,10 @@
+.home-page {
+    & .img-container {
+        height: 550px;
+        margin-bottom: 10px;
+        & img {
+            height: 100%;
+            object-fit: cover
+        }
+    }
+}

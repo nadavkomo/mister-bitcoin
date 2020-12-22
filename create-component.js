@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const validOptions = {
-    name: 'name', 
-    n: 'name', 
-    dir: 'dir', 
+    name: 'name',
+    n: 'name',
+    dir: 'dir',
     d: 'dir',
     style: 'style',
     s: 'style',
@@ -15,7 +15,7 @@ const validOptions = {
 
 const defaultOptions = {
     dir: 'components',
-    style: 'css',
+    style: 'scss',
     cmpType: 'class'
 }
 
@@ -34,7 +34,7 @@ const cleanOption = (op) => {
 }
 
 const validateOption = (op) => {
-    if (!validOptions[op])  throw `'${op}' is not a valid option!`
+    if (!validOptions[op]) throw `'${op}' is not a valid option!`
 }
 
 const validateValue = (val) => {
@@ -46,18 +46,18 @@ const validateValue = (val) => {
 const parseOptions = (args) => {
     const options = Object.assign({}, defaultOptions)
 
-    for (let i=0; i < args.length; i=i+2) {
+    for (let i = 0; i < args.length; i = i + 2) {
         const op = cleanOption(args[i])
-        const val = args[i +1]
-        
+        const val = args[i + 1]
+
         validateOption(op)
         validateValue(val)
-    
+
         options[op] = val
     }
-    
+
     if (!options.name) throw 'name is required!'
-    
+
     return options
 }
 
@@ -103,7 +103,7 @@ const showHelp = () => {
     console.log('   --name      required')
     console.log('   --dir       optional, default: components')
     console.log('   --cmpType   optional, default: class')
-    console.log('   --style     optional, default: css')
+    console.log('   --style     optional, default: scss')
 }
 
 try {
@@ -114,20 +114,20 @@ try {
     }
 
     const options = parseOptions(args)
-    const {name, dir, style, cmpType} = options
+    const { name, dir, style, cmpType } = options
     const rootDir = path.join(__dirname, `/src/${dir}/${name}`)
 
     fs.mkdirSync(rootDir);
 
-    fs.writeFileSync(`${rootDir}/${name}.${style}`,styleTemplate(name))
-    console.log("css file created successfully");
+    fs.writeFileSync(`${rootDir}/${name}.${style}`, styleTemplate(name))
+    console.log("scss file created successfully");
 
     const template = cmpType === 'class' ? componentClassTemplate : componentFunctionTemplate
-    fs.writeFileSync(`${rootDir}/${name}.js`, template(name, style))
+    fs.writeFileSync(`${rootDir}/${name}.jsx`, template(name, style))
     console.log("component file created successfully");
 
     fs.writeFileSync(`${rootDir}/index.js`, `export { default } from './${name}'`);
     console.log("index file created successfully");
-} catch(e) {
+} catch (e) {
     console.log('ERROR:', e.message ? e.message : e)
 }
