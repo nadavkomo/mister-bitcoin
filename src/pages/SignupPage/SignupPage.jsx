@@ -24,41 +24,41 @@ class _SignupPage extends Component {
         const value = target.value
         this.setState(prevState => ({ user: { ...prevState.user, [field]: value } }))
     }
-    onLogin = async (ev) => {
-        ev.preventDefault()
-        const name = this.state.user.name
-        if (name === '') {
-            this.setState({ errMsg: 'username invalid' })
-            setTimeout(() => {
-                this.setState({ errMsg: '' })
-                this.setState({
-                    user: {
-                        name: '',
-                        coins: 100,
-                        moves: []
-                    },
-                })
-            }, 2500)
-            return
-        }
-        const user = await this.props.login(name)
-        if (!user) {
-            this.setState({ errMsg: 'login failed' })
-            setTimeout(() => {
-                this.setState({ errMsg: '' })
-                this.setState({
-                    user: {
-                        name: '',
-                        coins: 100,
-                        moves: []
-                    },
-                })
-            }, 2500)
-            return
-        }
-        // const user = this.props.login(name)
-        this.props.history.push('/')
-    }
+    // onLogin = async (ev) => {
+    //     ev.preventDefault()
+    //     const name = this.state.user.name
+    //     if (name === '') {
+    //         this.setState({ errMsg: 'username invalid' })
+    //         setTimeout(() => {
+    //             this.setState({ errMsg: '' })
+    //             this.setState({
+    //                 user: {
+    //                     name: '',
+    //                     coins: 100,
+    //                     moves: []
+    //                 },
+    //             })
+    //         }, 2500)
+    //         return
+    //     }
+    //     const user = await this.props.login(name)
+    //     if (!user) {
+    //         this.setState({ errMsg: 'login failed' })
+    //         setTimeout(() => {
+    //             this.setState({ errMsg: '' })
+    //             this.setState({
+    //                 user: {
+    //                     name: '',
+    //                     coins: 100,
+    //                     moves: []
+    //                 },
+    //             })
+    //         }, 2500)
+    //         return
+    //     }
+    //     // const user = this.props.login(name)
+    //     this.props.history.push('/')
+    // }
     onConnect = async (ev, func) => {
         if (func === this.props.login) ev.preventDefault()
         const name = this.state.user.name

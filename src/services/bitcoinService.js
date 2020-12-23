@@ -5,7 +5,6 @@ export default {
     getRate,
     getMarketPrice,
     getTradeVolume
-
 }
 
 async function getRate(coins) {
@@ -1291,3 +1290,4 @@ async function getTradeVolume() {
         return { values, name: tradeValume1.name, desc: tradeValume1.description };
     }
 }
+
